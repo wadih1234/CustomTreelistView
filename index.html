@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<style>
+
+.tree-list li{
+  list-style:none;
+}
+.root-node{
+  margin:0;
+  padding:0;
+}
+.caret{
+  cursor:pointer;
+  user-select:none;
+}
+.nested{
+  display:none;
+ margin-top: 20px;
+}
+.active{
+  display: block;
+}
+
+.tree-list li{
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.tree-list ul li::before{
+    position: absolute;
+    left: -30px;
+    top: 0px;
+    border-left: 2px solid gray;
+    border-bottom: 2px solid gray;
+    content: "";
+    width: 25px;
+    height: 15px;
+}
+
+.tree-list li:last-child::after{
+    display: none;
+}
+
+.tree-list li::after{
+    position: absolute;
+    left:-30px;
+    bottom:0px;
+    border-left: 2px solid gray;
+    content:"";
+    width:18px;
+    height:100%;
+}
+
+.tree-list li:first-child::after{
+    height:140%;
+}
+
+
+.action{
+    background-color: lightgray;
+    border:1px solid black;
+    padding:5px;
+    
+}
+</style>
+</head>
+<body>
+    <div class="outer">
+        <ul class="tree-list root-node">
+          <li><span class="caret"><div class="action">When....</div></span>
+            <ul class="nested">
+              <li><div class="action">Actions....</div></li>
+              <li><div class="action">Actions....</div></li>
+              <li><span class="caret"><div class="action">When....</div></span>
+                <ul class="nested">
+                  <li><div class="action">Actions....</div></li>
+                  <li><div class="action">Actions....</div></li>
+                  <li><span class="caret"><div class="action">When....</div></span>
+                    <ul class="nested">
+                      <li><div class="action">Actions....</div></li>
+                      <li><div class="action">Action....</div></li>
+                      <li><div class="action">Actions....</div></li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+
+<script>
+    
+var toggler = document.querySelectorAll(".caret");
+
+if(toggler){
+    for (let i = 0; i < toggler.length; i++) {
+        toggler[i].addEventListener("click", function() {
+           
+          this.parentElement.querySelector(".nested").classList.toggle("active");
+          this.classList.toggle("caret-down");
+        });
+      }
+}
+
+
+</script>
+</body>
+</html>

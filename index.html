@@ -59,18 +59,13 @@
     height:140%;
 }
 
-
-.action{
-    background-color: lightgray;
-    border:1px solid black;
-    padding:5px;
-    
+ 
 }
 </style>
 </head>
 <body>
     <div class="outer">
-        <ul class="tree-list root-node">
+        <ul id="root1" class="tree-list root-node">
           <li><span class="caret"><div class="action">When....</div></span>
             <ul class="nested">
               <li><div class="action">Actions....</div></li>
@@ -95,19 +90,59 @@
 
 <script>
     
-var toggler = document.querySelectorAll(".caret");
 
-if(toggler){
-    for (let i = 0; i < toggler.length; i++) {
-        toggler[i].addEventListener("click", function() {
-           
-          this.parentElement.querySelector(".nested").classList.toggle("active");
-          this.classList.toggle("caret-down");
-        });
-      }
+  
+  
+  function buildTreeList(rootElementId){
+    var root = document.getElementById(rootElementId);
+
+    if(root){
+
+          var toggler = document.querySelectorAll("#" + rootElementId + "  .caret");
+              if(toggler){
+                  for (let i = 0; i < toggler.length; i++) {
+                      toggler[i].addEventListener("click", function() {
+                      
+                        toggler[i].parentElement.querySelector(".nested").classList.toggle("active");
+                      
+                      
+                        toggler[i].classList.toggle("caret-down");
+                      });
+                    }
+              }
+    }
+
 }
 
+buildTreeList("root1");
 
 </script>
+
+  <ul id="root2" class="tree-list root-node">
+    <li><span class="caret"><div class="action">When....</div></span>
+      <ul class="nested">
+        <li><div class="action">Actions....</div></li>
+        <li><div class="action">Actions....</div></li>
+        <li><span class="caret"><div class="action">When....</div></span>
+          <ul class="nested">
+            <li><div class="action">Actions....</div></li>
+            <li><div class="action">Actions....</div></li>
+            <li><span class="caret"><div class="action">When....</div></span>
+              <ul class="nested">
+                <li><div class="action">Actions....</div></li>
+                <li><div class="action">Action....</div></li>
+                <li><div class="action">Actions....</div></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+
+<script>
+  buildTreeList("root2");
+</script>
+
 </body>
 </html>
